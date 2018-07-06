@@ -1,11 +1,44 @@
-<!DOCTYPE html>
-{% extends "base.html" %}
-{% load bootstrap4 %}
+{% extends "base.html" %} 
+{% load bootstrap4 %} 
+{% load staticfiles %} 
+{% block extra_js %}
+<script>
+    $(document).ready(function () {
+
+        // clear the default data from area_choice, and later update
+        // areas based on user's district choice
+        $("#area_choice").html('<option value="1" selected>---------</option>');
+
+        $("#district_choice").change(function () {
+            console.log("requesting new data");
+            var req = $.ajax({
+                url: "{% url 'posts:get_location' %}",
+                type: "POST",
+                data: {
+                    user_choice: $("#district_choice option:selected").text(),
+                    csrfmiddlewaretoken: '{{ csrf_token }}'
+                },
+                dataType: "html",
+
+                success: function(data) {
+                    console.log("data retrieved");
+                    console.log(data);
+                    $("#area_choice").html(data);
+                },
+
+                error: function() {
+                    console.log("error occured");
+                }
+            });
+        });
+    });
+</script> 
+{% endblock extra_js %} 
+
 {% block content %}
-    <h1>Create New Ad</h1>
-    <form method="POST">
-        {% csrf_token %}
-        {% bootstrap_form form %}
-        <button type="submit" class="btn btn-success">Create</button>
-    </form>
+<h1>Create New Ad</h1>
+<form method="POST">
+    {% csrf_token %} {% bootstrap_form form %}
+    <button type="submit" class="btn btn-success">Create</button>
+</form>
 {% endblock content %}

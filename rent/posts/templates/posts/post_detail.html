@@ -1,9 +1,27 @@
 <!DOCYTPE html>
 {% extends "base.html" %}
 {% block content %}
-    <h1>{{ post.house_name }}</h1>
-    <p>{{ post.house_size }}</p>
-    <p>{{ post.family_allowed }}</p>
-    <p>{{ post.office_allowed }}</p>
-    <p>{{ post.bachelors_allowed }}</p>
+    <p>District: {{ post.district }}</p>
+    <p>Area: {{ post.area }}</p>
+    <p>House Size: {{ post.house_size }}</p>
+    <p>Description: {{ post.description }}</p>
+    
+    {% if post.family_allowed %}
+        <p>Family Allowed: Yes</p>
+    {% else %}
+        <p>Family Allowed: No</p>
+    {% endif %}
+    
+    {% if post.office_allowed %}
+        <p>Office Allowed: Yes</p>
+    {% else %}
+        <p>Office Allowed: No</p>
+    {% endif %}
+
+    {% if post.bachelors_allowed %}
+        <p>Bachelors Allowed: Yes</p>
+    {% else %}
+        <p>Bachelors Allowed: No</p>
+    {% endif %}
+
 {% endblock content %}  

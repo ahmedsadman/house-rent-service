@@ -4,6 +4,7 @@
     <h1>Hello {{ user.username }}</h1>
     <h1>Posts by you:</h1>
     {% for post in post_list %}
-        <p>{{ post.house_name }}</p>
+        <a href="{% url 'posts:post_detail' pk=post.pk %}">{{ post.district }}-{{ post.area }}-{{ post.creation_date }}</a>
+        <br>
     {% endfor %}
 {% endblock content %}
