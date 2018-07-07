@@ -1,6 +1,19 @@
 <!DOCYTPE html>
 {% extends "base.html" %}
+{% load static %}
+{% load ratings %}
+{% block extra_js %}
+    <link rel="stylesheet" href="{% static 'star-ratings/css/star-ratings.css' %}">
+    <script type="text/javascript" src="{% static 'star-ratings/js/dist/star-ratings.min.js' %}"></script>
+{% endblock extra_js %}
+
 {% block content %}
+    <!-- Rating -->
+    <p>Rate {{ post.author.first_name }} {{ post.author.last_name }}</p>
+    {% ratings post.author %}
+    <hr>
+    <!-- End Rating -->
+
     <p>District: {{ post.district }}</p>
     <p>Area: {{ post.area }}</p>
     <p>House Size: {{ post.house_size }}</p>

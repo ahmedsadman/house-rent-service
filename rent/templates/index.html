@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 {% extends "base.html" %}
+{% load bootstrap4 %}
 {% block extra_js %}
 <script>
     $(document).ready(function () {
@@ -37,18 +38,24 @@
 {% endblock extra_js %} 
 
 {% block content %}
-    {% if user.is_authenticated %}
-        <h1>Welcome</h1>
-        <h1>Search home</h1>
-        {% if search_form %}
-            <form method="POST">
-                {% csrf_token %}
-                {{ search_form.as_p }}
-                <button type="submit" class="btn btn-primary">Search</button>
-            </form>
-        {% endif %}
-    {% else %}
-        <h2>Welcome, please login to continue</h1>
-    {% endif %}
+    <div class="row justify-content-md-center mt-5">
+        <div class="col col-lg-7">
+                {% if user.is_authenticated %}
+                    <h1>Welcome</h1>
+                    <h2>Search home</h2>
+                    {% if search_form %}
+                        <form method="POST">
+                            {% csrf_token %}
+                            {% bootstrap_form search_form %}
+                            <button type="submit" class="btn btn-primary">Search</button>
+                        </form>
+                    {% endif %}
+                {% else %}
+                    <h2>Welcome, please login to continue</h1>
+                {% endif %}
+        </div>
+        
+    </div>
+   
     
 {% endblock content %}
