@@ -1,5 +1,54 @@
 <!DOCTYPE html>
 {% extends "base.html" %}
+{% block extra_js %}
+<script>
+    $(document).ready(function () {
+
+        // clear the default data from area_choice, and later update
+        // areas based on user's district choice
+        $("#area_choice").html('<option value="" selected>---------</option>');
+
+        $("#district_choice").click(function () {
+            console.log("requesting new data");
+            var req = $.ajax({
+                url: "{% url 'posts:get_location' %}",
+                type: "POST",
+                data: {
+                    user_choice: $("#district_choice option:selected").text(),
+                    csrfmiddlewaretoken: '{{ csrf_token }}'
+                },
+                dataType: "html",
+
+                success: function(data) {
+                    console.log("data retrieved");
+                    console.log(data);
+                    $("#area_choice").html(data);
+                    $("#area_choice").prepend('<option value="" selected>---------</option>');
+                },
+
+                error: function() {
+                    console.log("error occured");
+                }
+            });
+        });
+
+    });
+</script> 
+{% endblock extra_js %} 
+
 {% block content %}
-    <h1>Welcome</h1>
+    {% if user.is_authenticated %}
+        <h1>Welcome</h1>
+        <h1>Search home</h1>
+        {% if search_form %}
+            <form method="POST">
+                {% csrf_token %}
+                {{ search_form.as_p }}
+                <button type="submit" class="btn btn-primary">Search</button>
+            </form>
+        {% endif %}
+    {% else %}
+        <h2>Welcome, please login to continue</h1>
+    {% endif %}
+    
 {% endblock content %}
