@@ -13,7 +13,7 @@
     {% ratings post.author %}
     <hr>
     <!-- End Rating -->
-
+    <p>House Name: {{ post.house_name }}</p>
     <p>District: {{ post.district }}</p>
     <p>Area: {{ post.area }}</p>
     <p>House Size: {{ post.house_size }}</p>
@@ -37,4 +37,9 @@
         <p>Bachelors Allowed: No</p>
     {% endif %}
 
+    <div class="image_view my-5">
+        {% for image in post.images_set.all %}
+            <img src="{{ image.image.url }}" alt="" height="200" width="200">
+        {% endfor %}    
+    </div>
 {% endblock content %}  

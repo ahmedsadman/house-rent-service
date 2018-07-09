@@ -37,8 +37,12 @@
 
 {% block content %}
 <h1>Create New Ad</h1>
-<form method="POST">
+<form method="POST" enctype="multipart/form-data">
     {% csrf_token %} {% bootstrap_form form %}
+    {{ formset.management_form }}
+    {% for im_form in formset %}
+        {% bootstrap_form im_form %}
+    {% endfor %}
     <button type="submit" class="btn btn-success">Create</button>
 </form>
 {% endblock content %}

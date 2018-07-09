@@ -1,5 +1,5 @@
 from django import forms
-from posts.models import Post, District, Area
+from posts.models import Post, District, Area, Images
 
 
 class PostForm(forms.ModelForm):
@@ -11,5 +11,13 @@ class PostForm(forms.ModelForm):
 
     class Meta():
         model = Post
-        fields = ('district', 'area', 'house_size', 'address', 'description',
+        fields = ('house_name', 'district', 'area', 'house_size', 'address', 'description',
                   'family_allowed', 'office_allowed', 'bachelors_allowed')
+
+
+class ImageForm(forms.ModelForm):
+    image = forms.ImageField(label='Image')
+
+    class Meta():
+        model = Images
+        fields = ('image',)

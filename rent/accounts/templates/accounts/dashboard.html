@@ -1,7 +1,17 @@
 <!DOCTYPE html>
 {% extends "base.html" %}
+{% load staticfiles %}
+{% load ratings %}
+{% block extra_js %}
+    <link rel="stylesheet" href="{% static 'star-ratings/css/star-ratings.css' %}">
+    <script type="text/javascript" src="{% static 'star-ratings/js/dist/star-ratings.min.js' %}"></script>
+{% endblock extra_js %}
 {% block content %}
     <h1>Hello {{ user.username }}</h1>
+    <hr>
+    <h3>Your Rating</h3>
+    {% ratings user %}
+    <hr>
     <h1>Posts by you:</h1>
     {% for post in post_list %}
         <a href="{% url 'posts:post_detail' pk=post.pk %}">{{ post.district }}-{{ post.area }}-{{ post.creation_date }}</a>
