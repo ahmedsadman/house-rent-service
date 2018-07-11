@@ -1,31 +1,33 @@
-<!DOCTYPE html>
-{% load staticfiles %}
+<!DOCTYPE html> {% load staticfiles %}
 
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>RentService</title>
-    <!-- Bootstrap -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>HomeView</title>
+
+    <!-- Custom fonts/icons for this template -->
+    <link href="{% static 'vendor/simple-line-icons/css/simple-line-icons.css' %}" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Exo+2|Quicksand" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="{% static 'css/landing-page.min.css' %}" rel="stylesheet">
+
+    <!-- Bootstrap and JQuery -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
         crossorigin="anonymous"></script>
+
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
         crossorigin="anonymous">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
-        crossorigin="anonymous"></script>
-
-    <!-- Google Fonts-->
-    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
-
-    <!-- CSS-->
-    {% block extra_css %}
-    
-    {% endblock extra_css %}
-
-    <!-- JS -->
-    {% block extra_js %}
+        crossorigin="anonymous"></script> 
+    {% block extra_js %} 
     
     {% endblock extra_js %}
 </head>
@@ -34,7 +36,7 @@
     <!-- navbar here -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
-            <a class="navbar-brand" href="{% url 'home' %}">RentService</a>
+            <a class="navbar-brand" href="{% url 'home' %}">HomeView</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup"
                 aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -46,13 +48,16 @@
                 </div>
                 <div class="navbar-nav">
                     {% if user.is_authenticated %}
-                        <a class="nav-item nav-link" href="#">Welcome: {{ user.username }}</a>
-                        <a class="nav-item nav-link" href="{% url 'accounts:dashboard' %}">Dashboard</a>
-                        <a class="nav-item nav-link" href="{% url 'posts:post_new' %}">Create Ad</a>
-                        <a class="nav-item nav-link" href="{% url 'accounts:logout' %}">Logout</a>
+                    <a class="nav-item nav-link" href="#">Welcome: {{ user.username }}</a>
+                    <a class="nav-item nav-link" href="{% url 'accounts:dashboard' %}">Dashboard</a>
+                    <a class="nav-item nav-link" href="{% url 'posts:post_new' %}">Create Ad</a>
+                    <a class="nav-item nav-link" href="{% url 'accounts:logout' %}">
+                        <span class="icon-logout"></span> Logout</a>
                     {% else %}
-                        <a class="nav-item nav-link" href="{% url 'accounts:login' %}">Login</a>
-                        <a class="nav-item nav-link" href="{% url 'accounts:signup' %}">Signup</a>
+                    <a class="nav-item nav-link" href="{% url 'accounts:login' %}">
+                        <span class="icon-login"></span> Login</a>
+                    <a class="nav-item nav-link" href="{% url 'accounts:signup' %}">
+                        <span class="icon-user"></span> Signup</a>
                     {% endif %}
                 </div>
             </div>
@@ -60,9 +65,16 @@
     </nav>
     <!-- navbar end-->
 
-    <div class="container">
+    <div class="mycontainer">
         {% block content %} {% endblock content %}
     </div>
+    <footer class="footer bg-light">
+        <div class="container">
+          <a href="">Home</a>
+          <a href="">About</a>
+          <a href="">Contact</a>
+        </div>
+      </footer>
 </body>
 
 </html>

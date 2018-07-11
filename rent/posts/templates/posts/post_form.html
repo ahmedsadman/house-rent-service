@@ -36,13 +36,21 @@
 {% endblock extra_js %} 
 
 {% block content %}
-<h1>Create New Ad</h1>
-<form method="POST" enctype="multipart/form-data">
-    {% csrf_token %} {% bootstrap_form form %}
-    {{ formset.management_form }}
-    {% for im_form in formset %}
-        {% bootstrap_form im_form %}
-    {% endfor %}
-    <button type="submit" class="btn btn-success">Create</button>
-</form>
+<div class="container">
+    <h1>Create New Ad</h1>
+        {% for message  in messages %}
+            <div class="alert alert-danger">
+                {{ message }}
+            </div>
+        {% endfor %}
+        <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %} {% bootstrap_form form %}
+        {{ formset.management_form }}
+        {% for im_form in formset %}
+            {% bootstrap_form im_form %}
+        {% endfor %}
+        <button type="submit" class="btn btn-success">Create</button>
+    </form>
+</div>
+
 {% endblock content %}

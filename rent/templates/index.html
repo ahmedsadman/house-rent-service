@@ -1,6 +1,5 @@
-<!DOCTYPE html>
-{% extends "base.html" %}
-{% load bootstrap4 %}
+{% extends "base.html" %} 
+{% load bootstrap4 %} 
 {% block extra_js %}
 <script>
     $(document).ready(function () {
@@ -20,14 +19,14 @@
                 },
                 dataType: "html",
 
-                success: function(data) {
+                success: function (data) {
                     console.log("data retrieved");
                     console.log(data);
                     $("#area_choice").html(data);
                     $("#area_choice").prepend('<option value="" selected>---------</option>');
                 },
 
-                error: function() {
+                error: function () {
                     console.log("error occured");
                 }
             });
@@ -38,24 +37,129 @@
 {% endblock extra_js %} 
 
 {% block content %}
-    <div class="row justify-content-md-center mt-5">
-        <div class="col col-lg-7">
-                {% if user.is_authenticated %}
+    <!-- Masthead -->
+    <header class="masthead text-white text-center">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row justify-content-md-center">
+                <div class="col col-lg-7">
+                    {% if user.is_authenticated %}
                     <h1>Welcome</h1>
                     <h2>Search home</h2>
                     {% if search_form %}
-                        <form method="POST">
-                            {% csrf_token %}
-                            {% bootstrap_form search_form %}
-                            <button type="submit" class="btn btn-primary">Search</button>
-                        </form>
-                    {% endif %}
-                {% else %}
-                    <h2>Welcome, please login to continue</h1>
-                {% endif %}
+                    <form method="POST">
+                        {% csrf_token %} {% bootstrap_form search_form %}
+                        <button type="submit" class="btn btn-primary">Search</button>
+                    </form>
+                    {% endif %} {% else %}
+                    <h2><strong>An ultimate house-renting solution. Please login to continue</strong></h1>
+                        {% endif %}
+                </div>
+            </div>
         </div>
-        
-    </div>
-   
+    </header>
+
+    <!-- Icons Grid -->
+    <section class="features-icons bg-light text-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="features-icons-item mx-auto mb-2 mb-lg-0 mb-lg-3">
+                        <div class="features-icons-icon d-flex">
+                            <i class="icon-screen-desktop m-auto text-primary"></i>
+                        </div>
+                        <h3>Post an Ad</h3>
+                        <p class="lead mb-0">Make your home available to renters</p>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="features-icons-item mx-auto mb-3 mb-lg-0 mb-lg-3">
+                        <div class="features-icons-icon d-flex">
+                            <i class="icon-layers m-auto text-primary"></i>
+                        </div>
+                        <h3>Filtered Search</h3>
+                        <p class="lead mb-0">Find the home you want with all criterias met</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+
+    <div class="container-fluid">
+        <!-- Image Showcases -->
+        <section class="showcase">
+            <div class="container-fluid p-0">
+                <div class="row no-gutters">
     
+                    <div class="col-lg-6 order-lg-2 text-white showcase-img" style="background-image: url('../static/img/home.jpg');"></div>
+                    <div class="col-lg-6 order-lg-1 my-auto showcase-text">
+                        <h2>Looking for homes to rent ?</h2>
+                        <p class="lead mb-0">Time constraint and hastle of roaming in streets looking for suitable homes pulling you down. Filter your search here
+                            and find your home easily. Looking for homes for rent was never this easy! </p>
+                    </div>
+                </div>
+                <div class="row no-gutters">
+                    <div class="col-lg-6 text-white showcase-img" style="background-image: url('../static/img/landlord.jpg');"></div>
+                    <div class="col-lg-6 my-auto showcase-text">
+                        <h2>LandLord?</h2>
+                        <p class="lead mb-0">Get your homes rented easily. More number of views online than people physically coming to see your home each time.
+                            Lesser hastle of showing your home everytime to potential tenets !</p>
+                    </div>
+                </div>
+                <div class="row no-gutters">
+                    <div class="col-lg-6 order-lg-2 text-white showcase-img" style="background-image: url('../static/img/bg-showcase-3.jpg');"></div>
+                    <div class="col-lg-6 order-lg-1 my-auto showcase-text">
+                        <h2>Save your precious time</h2>
+                        <p class="lead mb-0">Now, searching for home is not consuming for all. Continue to cope up with busy 
+                            schedule, and still search for your dream home
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 h-100 text-center text-lg-left my-auto">
+                    <ul class="list-inline mb-2">
+                        <li class="list-inline-item">
+                            <a href="About us.html">About</a>
+                        </li>
+                        <li class="list-inline-item">&sdot;</li>
+                        <li class="list-inline-item">
+                            <a href="Contact.html">Contact</a>
+                        </li>
+                        <li class="list-inline-item">&sdot;</li>
+                        <li class="list-inline-item">
+                            <a href="FAQ.html">FAQ</a>
+                        </li>
+                        <li class="list-inline-item">&sdot;</li>
+                        <li class="list-inline-item">
+                            <a href="FeedBack.html">FeedBack</a>
+                        </li>
+                    </ul>
+
+                </div>
+                <div class="col-lg-6 h-100 text-center text-lg-right my-auto">
+                    <ul class="list-inline mb-0">
+                        <li class="list-inline-item mr-3">
+                            <a href="#">
+                                <i class="fa fa-facebook fa-2x fa-fw"></i>
+                            </a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="#">
+                                <i class="fa fa-instagram fa-2x fa-fw"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- My main-->
 {% endblock content %}

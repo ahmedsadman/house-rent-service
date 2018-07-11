@@ -1,12 +1,15 @@
 {% extends "base.html" %}
 {% load staticfiles %}
 {% block content %}
-    <h1>Search Results</h1>
-    {% if results %}
-        {% for r in results %}
-            <a href="{% url 'posts:post_detail' pk=r.pk %}">{{ r.author }}-{{ r.district }}-{{ r.area }}-{{ r.creation_date }}</a><br>
-        {% endfor %}
-    {% else %}
-        <p>Sorry, no results found under selected filters. Try to broaden your criteria</p>
-    {% endif %}
+    <div class="container">
+        <h1>Search Results</h1>
+        {% if results %}
+            {% for r in results %}
+                <a href="{% url 'posts:post_detail' pk=r.pk %}">{{ r.author }}-{{ r.district }}-{{ r.area }}-{{ r.creation_date }}</a><br>
+            {% endfor %}
+        {% else %}
+            <p>Sorry, no results found under selected filters. Try to broaden your criteria</p>
+        {% endif %}
+    </div>
+
 {% endblock content %}

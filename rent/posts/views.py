@@ -10,6 +10,10 @@ from . import forms
 from posts.models import Post, District, Area, Images
 from django.utils import timezone
 from django.forms.models import modelformset_factory
+from django import forms as django_forms
+import posts.api as api
+from django.contrib import messages
+from django.contrib.auth.models import User
 
 
 class CreatePostView(LoginRequiredMixin, CreateView):
@@ -54,6 +58,14 @@ def create_post(request):
                                queryset=Images.objects.none())
 
         if postForm.is_valid() and formset.is_valid():
+            user = get_object_or_404(User, username=request.user.username)
+            req = api.Caas('password', user.userprofile.phone_no, 'APP_000001')
+            
+
+            if not req.direct_debit('25601', '50'):
+                messages.error(request, 'An error occured while trying to debit from the user account')
+                return render(request, 'posts/post_form.html', context={'form': postForm, 'formset': formset})
+
             post_form = postForm.save(commit=False)
             post_form.author = request.user
             post_form.creation_date = timezone.now()

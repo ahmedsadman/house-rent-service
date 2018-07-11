@@ -8,38 +8,44 @@
 {% endblock extra_js %}
 
 {% block content %}
-    <!-- Rating -->
-    <p>Rate {{ post.author.first_name }} {{ post.author.last_name }}</p>
-    {% ratings post.author %}
-    <hr>
-    <!-- End Rating -->
-    <p>House Name: {{ post.house_name }}</p>
-    <p>District: {{ post.district }}</p>
-    <p>Area: {{ post.area }}</p>
-    <p>House Size: {{ post.house_size }}</p>
-    <p>Description: {{ post.description }}</p>
-    
-    {% if post.family_allowed %}
-        <p>Family Allowed: Yes</p>
-    {% else %}
-        <p>Family Allowed: No</p>
-    {% endif %}
-    
-    {% if post.office_allowed %}
-        <p>Office Allowed: Yes</p>
-    {% else %}
-        <p>Office Allowed: No</p>
-    {% endif %}
+    <div class="container">
+        <!-- Rating -->
+        <p>Rate {{ post.author.first_name }} {{ post.author.last_name }}</p>
+        <!-- test field -->
+        <!-- <p>{{ post.author.userprofile.phone_no }}</p> -->
+        <!-- test field end-->
+        {% ratings post.author %}
+        <hr>
+        <!-- End Rating -->
+        <p>House Name: {{ post.house_name }}</p>
+        <p>District: {{ post.district }}</p>
+        <p>Area: {{ post.area }}</p>
+        <p>House Size: {{ post.house_size }}</p>
+        <p>Description: {{ post.description }}</p>
+        
+        {% if post.family_allowed %}
+            <p>Family Allowed: Yes</p>
+        {% else %}
+            <p>Family Allowed: No</p>
+        {% endif %}
+        
+        {% if post.office_allowed %}
+            <p>Office Allowed: Yes</p>
+        {% else %}
+            <p>Office Allowed: No</p>
+        {% endif %}
 
-    {% if post.bachelors_allowed %}
-        <p>Bachelors Allowed: Yes</p>
-    {% else %}
-        <p>Bachelors Allowed: No</p>
-    {% endif %}
+        {% if post.bachelors_allowed %}
+            <p>Bachelors Allowed: Yes</p>
+        {% else %}
+            <p>Bachelors Allowed: No</p>
+        {% endif %}
 
-    <div class="image_view my-5">
-        {% for image in post.images_set.all %}
-            <img src="{{ image.image.url }}" alt="" height="200" width="200">
-        {% endfor %}    
+        <div class="image_view my-5">
+            {% for image in post.images_set.all %}
+                <img src="{{ image.image.url }}" alt="" height="200" width="200">
+            {% endfor %}    
+        </div>
     </div>
+    
 {% endblock content %}  

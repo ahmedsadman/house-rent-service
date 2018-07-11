@@ -7,14 +7,16 @@
     <script type="text/javascript" src="{% static 'star-ratings/js/dist/star-ratings.min.js' %}"></script>
 {% endblock extra_js %}
 {% block content %}
-    <h1>Hello {{ user.username }}</h1>
-    <hr>
-    <h3>Your Rating</h3>
-    {% ratings user %}
-    <hr>
-    <h1>Posts by you:</h1>
-    {% for post in post_list %}
-        <a href="{% url 'posts:post_detail' pk=post.pk %}">{{ post.district }}-{{ post.area }}-{{ post.creation_date }}</a>
-        <br>
-    {% endfor %}
+    <div class="container">
+        <h1>Hello {{ user.username }}</h1>
+        <hr>
+        <h3>Your Rating</h3>
+        {% ratings user %}
+        <hr>
+        <h1>Posts by you:</h1>
+        {% for post in post_list %}
+            <a href="{% url 'posts:post_detail' pk=post.pk %}">{{ post.district }}-{{ post.area }}-{{ post.creation_date }}</a>
+            <br>
+        {% endfor %}
+    </div>
 {% endblock content %}
