@@ -29,6 +29,9 @@
                 {{ form.password2 }}
                 {{ form.phone_no }}
                 {{ form.address }}
+                <div class="alert alert-primary">
+                    By Registering, you will be automatically subscribed to our service under given phone number
+                </div>
                 <button type="submit">register</button>
                 <p class="message">Already registered?
                     <a href="{% url 'accounts:login' %}">Sign In</a>

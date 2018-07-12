@@ -11,17 +11,22 @@
     <div class="container">
         <!-- Rating -->
         <p>Rate {{ post.author.first_name }} {{ post.author.last_name }}</p>
-        <!-- test field -->
-        <!-- <p>{{ post.author.userprofile.phone_no }}</p> -->
-        <!-- test field end-->
         {% ratings post.author %}
+        
         <hr>
         <!-- End Rating -->
+        {% if user.is_authenticated %}
+            <a class="btn btn-primary" href="{% url 'posts:post_remove' pk=post.pk %}">
+                Remove
+            </a>
+        {% endif %}
         <p>House Name: {{ post.house_name }}</p>
         <p>District: {{ post.district }}</p>
         <p>Area: {{ post.area }}</p>
         <p>House Size: {{ post.house_size }}</p>
         <p>Description: {{ post.description }}</p>
+        <p>Rent: {{ post.rent }}</p>
+        <p>Phone No: {{ post.author.userprofile.phone_no }}</p>
         
         {% if post.family_allowed %}
             <p>Family Allowed: Yes</p>

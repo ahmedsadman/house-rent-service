@@ -29,6 +29,7 @@ class Post(models.Model):
     area = models.ForeignKey(Area, on_delete=models.CASCADE)
     house_size = models.IntegerField()
     address = models.CharField(max_length=255)
+    rent = models.IntegerField()
     description = models.TextField()
     family_allowed = models.BooleanField()
     office_allowed = models.BooleanField()

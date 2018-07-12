@@ -3,9 +3,10 @@ from __future__ import unicode_literals
 
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect, HttpResponse
+from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
-from django.views.generic import CreateView, TemplateView, ListView, DetailView
+from django.views.generic import CreateView, TemplateView, ListView, DetailView, DeleteView
 from . import forms
 from posts.models import Post, District, Area, Images
 from django.utils import timezone
@@ -32,6 +33,10 @@ class CreatePostView(LoginRequiredMixin, CreateView):
 
 class PostDetailView(DetailView):
     model = Post
+
+class PostDeleteView(LoginRequiredMixin, DeleteView):
+    model = Post
+    success_url = reverse_lazy('home')
 
 
 # handle ajax request to update locations based on district

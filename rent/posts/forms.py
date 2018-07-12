@@ -11,7 +11,7 @@ class PostForm(forms.ModelForm):
 
     class Meta():
         model = Post
-        fields = ('house_name', 'district', 'area', 'house_size', 'address', 'description',
+        fields = ('house_name', 'district', 'area', 'house_size', 'address', 'description', 'rent',
                   'family_allowed', 'office_allowed', 'bachelors_allowed')
 
 
