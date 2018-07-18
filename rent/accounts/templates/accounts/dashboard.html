@@ -13,6 +13,16 @@
         <h3>Your Rating</h3>
         {% ratings user %}
         <hr>
+        {% if not user.userprofile.is_subscribed %}
+            <div class="alert alert-danger">
+                You are not subscribed yet. To subscribe, go to message option in your phone and 
+                type "homeview {{user.username}}" and send it to 21213
+            </div>
+        {% else %}
+            <div class="alert alert-success">
+                You are successfully subscribed
+            </div>
+        {% endif %}
         <h1>Posts by you:</h1>
         {% for post in post_list %}
             <a href="{% url 'posts:post_detail' pk=post.pk %}">{{ post.district }}-{{ post.area }}-{{ post.creation_date }}</a>

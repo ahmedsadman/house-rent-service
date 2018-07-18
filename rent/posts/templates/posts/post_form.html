@@ -43,12 +43,15 @@
                 {{ message }}
             </div>
         {% endfor %}
+        <div class="alert alert-primary">
+            You will be charged 5 Tk from your phone for posting an Ad
+        </div>
         <form method="POST" enctype="multipart/form-data">
-        {% csrf_token %} {% bootstrap_form form %}
-        {{ formset.management_form }}
-        {% for im_form in formset %}
-            {% bootstrap_form im_form %}
-        {% endfor %}
+            {% csrf_token %} {% bootstrap_form form %}
+            {{ formset.management_form }}
+            {% for im_form in formset %}
+                {% bootstrap_form im_form %}
+            {% endfor %}
         <button type="submit" class="btn btn-success">Create</button>
     </form>
 </div>

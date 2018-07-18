@@ -3,8 +3,12 @@ import json
 
 
 class Api(object):
-    base_url = 'http://localhost:7000/caas/'
+    base_url = 'http://developer.bdapps.com/'
     response = None
+
+    def __init__(self):
+        self.applicationId = 'APP_005956'
+        self.password = '18815b346f736b3e6223404d2a82afc9'
 
     def refine_data(self, res, data):
         # get the expected data from json response
@@ -22,9 +26,8 @@ class Api(object):
 
 class Caas(Api):
 
-    def __init__(self, password, subscriberId, applicationId):
-        self.applicationId = applicationId
-        self.password = password
+    def __init__(self, subscriberId):
+        super().__init__()
         self.subscriberId = subscriberId
         self.baseData = {
             'applicationId': self.applicationId,
@@ -32,6 +35,7 @@ class Caas(Api):
             'subscriberId': self.subscriberId,
             'paymentInstrumentName': 'Mobile Account'
         }
+        self.base_url += 'caas/'
 
     def get_balance(self):
         url = self.base_url + 'balance/query'
@@ -60,7 +64,69 @@ class Caas(Api):
             return False
 
 
-# req = Caas('password', '8801866742387', 'APP_000001')
+class Subscribe(Api):
+
+    def __init__(self, subscriberId):
+        super().__init__()
+        self.baseData = {
+            'applicationId': self.applicationId,
+            'password': self.password,
+            'subscriberId': subscriberId,
+        }
+        self.base_url += 'subscription/'
+
+    def get_status(self):
+        url = self.base_url + 'getstatus'
+        res = requests.post(url, json=self.baseData)
+        self.response = res.status_code
+        print(self.response, url, self.baseData)
+        data = res.json()
+        print(data)
+        status = self.refine_data(data, 'subscriptionStatus')
+
+        if 'REGISTERED' in status:
+            print('SUBSCRIBED')
+            return True
+        else:
+            print('SUBSCRIBED')
+            return False
+
+    def opt_in(self):
+        url = self.base_url + 'send'
+        jsonData = self.baseData
+        jsonData['action'] = 1
+        res = requests.post(url, json=jsonData)
+        print(url)
+        self.response = res.status_code
+        data = res.json()
+        status = self.refine_data(data, 'statusDetail')
+
+        if 'Success' in status:
+            print('Opted In')
+            return True
+        else:
+            return False
+
+    def opt_out(self):
+        url = self.base_url + 'send'
+        jsonData = self.baseData
+        jsonData['action'] = 0
+        res = requests.post(url, json=jsonData)
+        self.response = res.status_code
+        data = res.json()
+        status = self.refine_data(data, 'statusDetail')
+
+        if 'Success' in status:
+            print('Opted Out')
+            return True
+        else:
+            return False
+
+# req = Caas('8801521423582')
 # print(req.get_balance())
 # print(req.execute_success())
 # print(req.direct_debit('25601', '50'))
+# print(req.response)
+
+# req = Subscribe('tel:8801521423582')
+# req.opt_out()
