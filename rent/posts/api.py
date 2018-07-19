@@ -1,14 +1,16 @@
 import requests
 import json
+import logging
 
+logger = logging.getLogger(__name__)
 
 class Api(object):
-    base_url = 'http://developer.bdapps.com/'
+    base_url = 'https://developer.bdapps.com/'
     response = None
 
     def __init__(self):
-        self.applicationId = 'APP_005956'
-        self.password = '18815b346f736b3e6223404d2a82afc9'
+        self.applicationId = 'APP_005971'
+        self.password = '7086721f15f48ef62bd34086dccb2276'
 
     def refine_data(self, res, data):
         # get the expected data from json response
@@ -92,13 +94,19 @@ class Subscribe(Api):
             return False
 
     def opt_in(self):
+        logger.error("opting in the user")
         url = self.base_url + 'send'
+        logger.error("URL: " + url)
         jsonData = self.baseData
         jsonData['action'] = 1
+        logger.error(jsonData)
         res = requests.post(url, json=jsonData)
         print(url)
         self.response = res.status_code
+        logger.error(res.status_code)
+        logger.error(res.text)
         data = res.json()
+        logger.error(data)
         status = self.refine_data(data, 'statusDetail')
 
         if 'Success' in status:
