@@ -10,4 +10,5 @@ urlpatterns = [
     url(r'^get_location/$', views.get_location_data, name='get_location'),
     url(r'^(?P<pk>\d+)', views.PostDetailView.as_view(), name='post_detail'),
     url(r'^remove/(?P<pk>\d+)/$', views.PostDeleteView.as_view(), name='post_remove'),
+    url(r'^getcontact/(?P<pk>\d+)/$', views.get_user_contact, name='getcontact')
 ]

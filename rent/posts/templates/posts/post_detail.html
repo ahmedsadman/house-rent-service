@@ -58,7 +58,7 @@
                 <p>{{ post.house_size }}</p>
                 <strong>Rent</strong>
                 <p>{{ post.rent }} tk</p>
-                <button class="btn btn-primary">Contact</button>
+                <a class="btn btn-primary" href="{% url 'posts:getcontact' pk=post.pk %}">Contact</a>
                 {% comment %} <strong>Phone No</strong>
                 <p>{{ post.author.userprofile.phone_no }}</p> {% endcomment %}
             </div>
