@@ -1,15 +1,59 @@
-{% extends "base.html" %}
-{% load staticfiles %}
-{% block content %}
-    <div class="container">
-        <h1>Search Results</h1>
+{% extends "base.html" %} {% load staticfiles %} {% block content %}
+<div class="container">
+    <!-- <h1>Search Results</h1>
         {% if results %}
             {% for r in results %}
                 <a href="{% url 'posts:post_detail' pk=r.pk %}">{{ r.author }}-{{ r.district }}-{{ r.area }}-{{ r.creation_date }}</a><br>
             {% endfor %}
         {% else %}
             <p>Sorry, no results found under selected filters. Try to broaden your criteria</p>
-        {% endif %}
+        {% endif %} -->
+    <div class="row justify-content-md-center">
+        <div class="col-sm-12 col-md-10 col-md-offset-2">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>House</th>
+
+                        <th class="text-center">Size</th>
+                        <th class="text-center">Rent</th>
+                        <th> </th>
+                    </tr>
+                </thead>
+                {% if not results %}
+                    <p class="mt-5">No results found for your criteria</p>
+                {% else %}
+                    <p class="mt-5">Showing results under the district {{ results.0.district }} </p>
+                {% endif %}
+                <tbody>
+                    {% for r in results %}
+                    <tr>
+                            <td class="col-sm-2 col-md-10">
+                                <div class="media">
+                                    <a class="thumbnail pull-left" href="#">
+                                        <img class="media-object" src="{{ r.images_set.all.first.image.url }}" alt="No Image" style="width: 72px; height: 72px;"> </a>
+                                    <div class="media-body">
+                                        <h4 class="media-heading">
+                                            <a href="{% url 'posts:post_detail' pk=r.pk %}">{{ r.house_name }}</a>
+                                        </h4>
+                                        <h5 class="media-heading">{{ r.area }}</h5>
+                                    </div>
+                                </div>
+                            </td>
+
+                            <td class="col-sm-2 col-md-2 text-center">
+                                <strong>{{ r.house_size }} sqft</strong>
+                            </td>
+                            <td class="col-sm-2 col-md-2 text-center">
+                                <strong>{{ r.rent }}</strong>
+                            </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+
+            </table>
+        </div>
     </div>
+</div>
 
 {% endblock content %}

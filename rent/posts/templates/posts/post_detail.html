@@ -8,14 +8,63 @@
 {% endblock extra_js %}
 
 {% block content %}
-    <div class="container">
+    <div class="container mt-5">
         <!-- Rating -->
-        <p>Rate {{ post.author.first_name }} {{ post.author.last_name }}</p>
-        {% ratings post.author %}
+        <div class="row justify-content-md-center">
+            <div class="col col-3">
+                <p>Rate {{ post.author.first_name }} {{ post.author.last_name }}</p>
+                {% ratings post.author %}
+                <hr>
+            </div>
+
+            <div class="col col-6">
+                <strong>House Name</strong>
+                <p>{{ post.house_name }}</p>
+                <strong>Address</strong>
+                <p>{{ post.address }}</p>
+                <strong>Description</strong>
+                <p>{{ post.description }}</p>
+                <div class="image_view my-5">
+                    {% for image in post.images_set.all %}
+                        <img src="{{ image.image.url }}" alt="" height="200" width="180">
+                    {% endfor %}    
+                </div> 
+                {% if post.family_allowed %}
+                    <p>Family Allowed: Yes</p>
+                {% endif %}
+                
+                {% if post.office_allowed %}
+                    <p>Office Allowed: Yes</p>
+                {% endif %}
+
+                {% if post.bachelors_allowed %}
+                    <p>Bachelors Allowed: Yes</p>
+                {% endif %}
+                {% if user.is_authenticated %}
+                    {% if user.username == post.author.username %}
+                        <a class="btn btn-primary" href="{% url 'posts:post_remove' pk=post.pk %}">
+                            Remove
+                        </a>
+                    {% endif %}
+                {% endif %}
+            </div>
+
+            <div class="col col-2">
+                <strong>District</strong>
+                <p>{{ post.district }}</p>
+                <strong>Area</strong>
+                <p>{{ post.area }}</p>
+                <strong>House Size</strong>
+                <p>{{ post.house_size }}</p>
+                <strong>Rent</strong>
+                <p>{{ post.rent }} tk</p>
+                <strong>Phone No</strong>
+                <p>{{ post.author.userprofile.phone_no }}</p>
+            </div>
+        </div>
         
-        <hr>
         <!-- End Rating -->
-        {% if user.is_authenticated %}
+        <!-- {% if user.is_authenticated %}
             {% if user.username == post.author.username %}
                 <a class="btn btn-primary" href="{% url 'posts:post_remove' pk=post.pk %}">
                     Remove
@@ -52,7 +101,7 @@
             {% for image in post.images_set.all %}
                 <img src="{{ image.image.url }}" alt="" height="200" width="200">
             {% endfor %}    
-        </div>
+        </div> -->
     </div>
     
 {% endblock content %}  
