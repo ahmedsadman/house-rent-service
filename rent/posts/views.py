@@ -52,10 +52,15 @@ def get_location_data(request):
                 i.pk, i.area_name)
         return HttpResponse(html_response)
 
+
 @login_required
 def get_user_contact(request, pk):
     post = Post.objects.get(pk=pk)
+    user = get_object_or_404(User, username=request.user.username)
+    req = api.Caas(user.userprofile.phone_no)
+    req.direct_debit('25601', '2')
     return render(request, 'posts/getcontact.html', {'post': post})
+
 
 @login_required
 def create_post(request):

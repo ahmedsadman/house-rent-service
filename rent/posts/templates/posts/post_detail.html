@@ -58,51 +58,10 @@
                 <p>{{ post.house_size }}</p>
                 <strong>Rent</strong>
                 <p>{{ post.rent }} tk</p>
-                <a class="btn btn-primary" href="{% url 'posts:getcontact' pk=post.pk %}">Contact</a>
-                {% comment %} <strong>Phone No</strong>
-                <p>{{ post.author.userprofile.phone_no }}</p> {% endcomment %}
+                <a class="btn btn-primary btn-block" href="{% url 'posts:getcontact' pk=post.pk %}">Contact</a>
+                <p class="alert alert-primary mt-2">You will be charged 2 tk to reveal contact details</p>
             </div>
         </div>
-        
-        <!-- End Rating -->
-        <!-- {% if user.is_authenticated %}
-            {% if user.username == post.author.username %}
-                <a class="btn btn-primary" href="{% url 'posts:post_remove' pk=post.pk %}">
-                    Remove
-                </a>
-            {% endif %}
-        {% endif %}
-        <p>House Name: {{ post.house_name }}</p>
-        <p>District: {{ post.district }}</p>
-        <p>Area: {{ post.area }}</p>
-        <p>House Size: {{ post.house_size }}</p>
-        <p>Description: {{ post.description }}</p>
-        <p>Rent: {{ post.rent }}</p>
-        <p>Phone No: {{ post.author.userprofile.phone_no }}</p>
-        
-        {% if post.family_allowed %}
-            <p>Family Allowed: Yes</p>
-        {% else %}
-            <p>Family Allowed: No</p>
-        {% endif %}
-        
-        {% if post.office_allowed %}
-            <p>Office Allowed: Yes</p>
-        {% else %}
-            <p>Office Allowed: No</p>
-        {% endif %}
-
-        {% if post.bachelors_allowed %}
-            <p>Bachelors Allowed: Yes</p>
-        {% else %}
-            <p>Bachelors Allowed: No</p>
-        {% endif %}
-
-        <div class="image_view my-5">
-            {% for image in post.images_set.all %}
-                <img src="{{ image.image.url }}" alt="" height="200" width="200">
-            {% endfor %}    
-        </div> -->
     </div>
     
 {% endblock content %}  

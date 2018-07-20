@@ -5,7 +5,7 @@ import logging
 logger = logging.getLogger(__name__)
 
 class Api(object):
-    base_url = 'https://developer.bdapps.com/'
+    base_url = 'http://localhost:7000/'
     response = None
 
     def __init__(self):
