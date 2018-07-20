@@ -42,7 +42,7 @@
                 {% endif %}
                 {% if user.is_authenticated %}
                     {% if user.username == post.author.username %}
-                        <a class="btn btn-primary" href="{% url 'posts:post_remove' pk=post.pk %}">
+                        <a class="btn btn-danger" href="{% url 'posts:post_remove' pk=post.pk %}">
                             Remove
                         </a>
                     {% endif %}
@@ -58,8 +58,9 @@
                 <p>{{ post.house_size }}</p>
                 <strong>Rent</strong>
                 <p>{{ post.rent }} tk</p>
-                <strong>Phone No</strong>
-                <p>{{ post.author.userprofile.phone_no }}</p>
+                <button class="btn btn-primary">Contact</button>
+                {% comment %} <strong>Phone No</strong>
+                <p>{{ post.author.userprofile.phone_no }}</p> {% endcomment %}
             </div>
         </div>
         
