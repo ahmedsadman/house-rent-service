@@ -7,37 +7,42 @@
 {% endblock extra_js %}
 {% block content %}
 <div class="container">
-    <div class="login-page">
-        <div class="form">
-            <form class="login-form" method="POST">
-                {% csrf_token %}
-                {% if form.non_field_errors %}
-                    {% for err in form.non_field_errors  %}
-                        <div class="alert alert-danger">{{err}}</div>
-                    {% endfor %}
-                {% endif %}
-                {% for message  in messages %}
-                    <div class="alert alert-danger">
-                        {{ message }}
+    <div class="row justify-content-md-center">
+        <div class="col col-lg-6">
+                <div class="login-page">
+                        <div class="form">
+                            <form class="login-form" method="POST">
+                                {% csrf_token %}
+                                {% if form.non_field_errors %}
+                                    {% for err in form.non_field_errors  %}
+                                        <div class="alert alert-danger">{{err}}</div>
+                                    {% endfor %}
+                                {% endif %}
+                                {% for message  in messages %}
+                                    <div class="alert alert-danger">
+                                        {{ message }}
+                                    </div>
+                                {% endfor %}
+                                {{ form.username }}
+                                {{ form.first_name }}
+                                {{ form.last_name }}
+                                {{ form.email }}
+                                {{ form.password }}
+                                {{ form.password2 }}
+                                {{ form.phone_no }}
+                                {{ form.address }}
+                                <div class="alert alert-primary">
+                                    After registering, you have to subscribe to the service using the given phone no
+                                </div>
+                                <button type="submit">register</button>
+                                <p class="message">Already registered?
+                                    <a href="{% url 'accounts:login' %}">Sign In</a>
+                                </p>
+                            </form>
+                        </div>
                     </div>
-                {% endfor %}
-                {{ form.username }}
-                {{ form.first_name }}
-                {{ form.last_name }}
-                {{ form.email }}
-                {{ form.password }}
-                {{ form.password2 }}
-                {{ form.phone_no }}
-                {{ form.address }}
-                <div class="alert alert-primary">
-                    After registering, you have to subscribe to the service using the given phone no
-                </div>
-                <button type="submit">register</button>
-                <p class="message">Already registered?
-                    <a href="{% url 'accounts:login' %}">Sign In</a>
-                </p>
-            </form>
         </div>
     </div>
+    
 </div>
 {% endblock content %}

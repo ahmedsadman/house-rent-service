@@ -71,9 +71,12 @@ def process_user_sms(request):
 
         # subscribe the user
         api = Subscribe(recv['sourceAddress'])
-        if api.opt_in():
-            userob.userprofile.masked_id = recv['sourceAddress']
-            userob.userprofile.is_subscribed = True
+        # if api.opt_in():
+        #     userob.userprofile.masked_id = recv['sourceAddress']
+        #     userob.userprofile.is_subscribed = True
+        api.opt_in()
+        userob.userprofile.masked_id = recv['sourceAddress']
+        userob.userprofile.is_subscribed = True
 
         # save the updated user data
         userob.save()
